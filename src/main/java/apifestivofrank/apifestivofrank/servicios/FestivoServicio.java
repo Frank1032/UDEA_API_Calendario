@@ -19,6 +19,7 @@ public class FestivoServicio implements IFestivoServicio {
     @Autowired
     FestivoRepositorio repositorio;
 
+    @SuppressWarnings("deprecation")
     private Date obtenerDomingoPascua(int año) {
         int mes, dia, A, B, C, D, E, M, N;
         M = 0;
@@ -83,6 +84,7 @@ public class FestivoServicio implements IFestivoServicio {
         return fecha;
     }
 
+    @SuppressWarnings("deprecation")
     private List<Festivo> calcularFestivos(List<Festivo> festivos, int año) {
         if (festivos != null) {
             Date pascua = obtenerDomingoPascua(año);
@@ -119,11 +121,13 @@ public class FestivoServicio implements IFestivoServicio {
         return fechas;
     }
 
+    @SuppressWarnings("deprecation")
     private boolean fechasIguales(Date fecha1, Date fecha2) {
         return fecha1.getYear() == fecha2.getYear() && fecha1.getMonth() == fecha2.getMonth()
                 && fecha1.getDay() == fecha2.getDay();
     }
 
+    @SuppressWarnings("deprecation")
     private boolean esFestivo(List<Festivo> festivos, Date fecha) {
         if (festivos != null) {
             // if (festivos.get(0).getFecha() != null && fecha.getYear() !=
