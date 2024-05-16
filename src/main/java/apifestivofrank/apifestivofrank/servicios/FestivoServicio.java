@@ -19,6 +19,10 @@ public class FestivoServicio implements IFestivoServicio {
     @Autowired
     FestivoRepositorio repositorio;
 
+    /**
+     * @param año
+     * @return
+     */
     @SuppressWarnings("deprecation")
     private Date obtenerDomingoPascua(int año) {
         int mes, dia, A, B, C, D, E, M, N;
@@ -50,16 +54,14 @@ public class FestivoServicio implements IFestivoServicio {
         D = ((19 * A) + M) % 30;
         E = ((2 * B) + (4 * C) + (6 * D) + N) % 7;
 
-        // Decidir entre los 2 casos
         if (D + E < 10) {
             dia = D + E + 22;
             mes = 3; // Marzo
         } else {
             dia = D + E - 9;
-            mes = 4; // Abril
+            mes = 4;
         }
 
-        // Excepciones especiales
         if (dia == 26 && mes == 4)
             dia = 19;
         if (dia == 25 && mes == 4 && D == 28 && E == 6 && A > 10)
@@ -70,7 +72,7 @@ public class FestivoServicio implements IFestivoServicio {
     private Date agregarDias(Date fecha, int dias) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.add(Calendar.DATE, dias); // minus number would decrement the days
+        cal.add(Calendar.DATE, dias);
         return cal.getTime();
     }
 
@@ -130,11 +132,8 @@ public class FestivoServicio implements IFestivoServicio {
     @SuppressWarnings("deprecation")
     private boolean esFestivo(List<Festivo> festivos, Date fecha) {
         if (festivos != null) {
-            // if (festivos.get(0).getFecha() != null && fecha.getYear() !=
-            // festivos.get(0).getFecha().getYear())
-            festivos = calcularFestivos(festivos, fecha.getYear() + 1900);
 
-            // System.out.println(fecha.getYear());
+            festivos = calcularFestivos(festivos, fecha.getYear() + 1900);
 
             for (final Festivo festivo : festivos) {
                 Calendar c = Calendar.getInstance();
